@@ -13,6 +13,11 @@
 		07862CC5220D0FBC00C666E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07862CC4220D0FBC00C666E7 /* Assets.xcassets */; };
 		07862CC8220D0FBC00C666E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07862CC6220D0FBC00C666E7 /* LaunchScreen.storyboard */; };
 		07862CD3220D0FBC00C666E7 /* SimpleABTestingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07862CD2220D0FBC00C666E7 /* SimpleABTestingUITests.swift */; };
+		07862CDF220DD82B00C666E7 /* Flags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07862CDE220DD82B00C666E7 /* Flags.swift */; };
+		07862CE1220E462400C666E7 /* FlagTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07862CE0220E462400C666E7 /* FlagTypes.swift */; };
+		07862CE3220E465200C666E7 /* Flag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07862CE2220E465200C666E7 /* Flag.swift */; };
+		07862CE5220E46E300C666E7 /* FlagID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07862CE4220E46E300C666E7 /* FlagID.swift */; };
+		07862CE7220E548000C666E7 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07862CE6220E548000C666E7 /* Environment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +41,11 @@
 		07862CCE220D0FBC00C666E7 /* SimpleABTestingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleABTestingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		07862CD2220D0FBC00C666E7 /* SimpleABTestingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleABTestingUITests.swift; sourceTree = "<group>"; };
 		07862CD4220D0FBC00C666E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		07862CDE220DD82B00C666E7 /* Flags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flags.swift; sourceTree = "<group>"; };
+		07862CE0220E462400C666E7 /* FlagTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagTypes.swift; sourceTree = "<group>"; };
+		07862CE2220E465200C666E7 /* Flag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flag.swift; sourceTree = "<group>"; };
+		07862CE4220E46E300C666E7 /* FlagID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagID.swift; sourceTree = "<group>"; };
+		07862CE6220E548000C666E7 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +87,9 @@
 		07862CBC220D0FB800C666E7 /* SimpleABTesting */ = {
 			isa = PBXGroup;
 			children = (
+				07862CDD220D102B00C666E7 /* ABTest */,
 				07862CBD220D0FB800C666E7 /* AppDelegate.swift */,
+				07862CE0220E462400C666E7 /* FlagTypes.swift */,
 				07862CBF220D0FB800C666E7 /* ViewController.swift */,
 				07862CC1220D0FB900C666E7 /* Main.storyboard */,
 				07862CC4220D0FBC00C666E7 /* Assets.xcassets */,
@@ -94,6 +106,17 @@
 				07862CD4220D0FBC00C666E7 /* Info.plist */,
 			);
 			path = SimpleABTestingUITests;
+			sourceTree = "<group>";
+		};
+		07862CDD220D102B00C666E7 /* ABTest */ = {
+			isa = PBXGroup;
+			children = (
+				07862CE6220E548000C666E7 /* Environment.swift */,
+				07862CE2220E465200C666E7 /* Flag.swift */,
+				07862CE4220E46E300C666E7 /* FlagID.swift */,
+				07862CDE220DD82B00C666E7 /* Flags.swift */,
+			);
+			path = ABTest;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,6 +220,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07862CE1220E462400C666E7 /* FlagTypes.swift in Sources */,
+				07862CE5220E46E300C666E7 /* FlagID.swift in Sources */,
+				07862CDF220DD82B00C666E7 /* Flags.swift in Sources */,
+				07862CE7220E548000C666E7 /* Environment.swift in Sources */,
+				07862CE3220E465200C666E7 /* Flag.swift in Sources */,
 				07862CC0220D0FB800C666E7 /* ViewController.swift in Sources */,
 				07862CBE220D0FB800C666E7 /* AppDelegate.swift in Sources */,
 			);
