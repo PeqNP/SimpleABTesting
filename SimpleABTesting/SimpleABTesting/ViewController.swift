@@ -7,30 +7,27 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    // This could be injected via an assembly
-    let flags = Flags()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // This could live in the assembly.
+        // Initialize the flags manager with the environment the app is running in
+        let flags = Flags(environment: .prod)
+        
+        // Register the flags
         flags.register(flags: [
             Flag<ButtonColor>(id: .buttonColor, key: "button_color", default: .default, mapper: ButtonColor.mapper),
             Flag<Bool>(id: .enableFlyoutMenu, default: false)
         ])
         
+        // Get a boolean value (the most common case) for our flag
+        print("Is the flyout menu enabled? \(flags.isEnabled(for: .enableFlyoutMenu) ? "Yes" : "No").")
+        
         // Get a multi-variant value
         var buttonColor = flags.value(for: .buttonColor, ButtonColor.self)
         print("The button color is: \(buttonColor.rawValue)")
         
-        // Get a boolean value (the most common case) for our flag
-        if flags.isEnabled(for: .enableFlyoutMenu) {
-            print("The flyout menu feature is enabled")
-        }
-        else {
-            print("The flyout menu feature is DISABLED")
-        }
-        
+        // Update the flag value with the server flag value.
         flags.setValue(key: "button_color", value: "red")
         buttonColor = flags.value(for: .buttonColor, ButtonColor.self)
         print("The button color is: \(buttonColor.rawValue)")

@@ -12,7 +12,13 @@ import Foundation
 
 class Flags {
     
+    private let environment: Environment
+    
     private var flagValues = [FlagValue]()
+    
+    init(environment: Environment) {
+        self.environment = environment
+    }
     
     /**
      Return the respective value for the flag.
@@ -27,7 +33,17 @@ class Flags {
         guard let flagValue = flagValueType(for: flagId) as? Flag<T> else {
             fatalError("Flat not found with ID \(flagId). Register flags with `register(flag:)`")
         }
-        return flagValue.value ?? flagValue.default
+        
+        if let value = flagValue.value {
+            return value
+        }
+        else if let value = flagValue.defaults[environment] {
+            return value
+        }
+        else {
+            // This should never happen as a default value is required and the `Flag` ensures that all environments are set up correctly.
+            fatalError("Failed to get value of flag \(flagId)")
+        }
     }
     
     /**
