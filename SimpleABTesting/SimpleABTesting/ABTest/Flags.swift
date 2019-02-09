@@ -37,13 +37,8 @@ class Flags {
         if let value = flagValue.value {
             return value
         }
-        else if let value = flagValue.defaults[environment] {
-            return value
-        }
-        else {
-            // This should never happen as a default value is required and the `Flag` ensures that all environments are set up correctly.
-            fatalError("Failed to get value of flag \(flagId)")
-        }
+        
+        return flagValue.defaultValue(for: environment)
     }
     
     /**
