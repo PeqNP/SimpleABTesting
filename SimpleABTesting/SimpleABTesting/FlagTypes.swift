@@ -14,4 +14,11 @@ enum ButtonColor: String {
     case red
     case yellow
     case blue
+    
+    static func mapper(_ value: Any) -> ButtonColor? {
+        guard let rawValue = value as? String else {
+            return nil
+        }
+        return ButtonColor(rawValue: rawValue)
+    }
 }

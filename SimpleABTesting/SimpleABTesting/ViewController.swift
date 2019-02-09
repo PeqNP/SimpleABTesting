@@ -15,13 +15,13 @@ class ViewController: UIViewController {
         
         // This could live in the assembly.
         flags.register(flags: [
-            Flag<ButtonColor>(id: .buttonColor, key: "button_color", default: .default),
+            Flag<ButtonColor>(id: .buttonColor, key: "button_color", default: .default, mapper: ButtonColor.mapper),
             Flag<Bool>(id: .enableFlyoutMenu, default: false)
         ])
         
         // Get a multi-variant value
-        let buttonColor = flags.value(for: .buttonColor, ButtonColor.self)
-        print("The variant for the color is: \(buttonColor.rawValue)")
+        var buttonColor = flags.value(for: .buttonColor, ButtonColor.self)
+        print("The button color is: \(buttonColor.rawValue)")
         
         // Get a boolean value (the most common case) for our flag
         if flags.isEnabled(for: .enableFlyoutMenu) {
@@ -30,6 +30,10 @@ class ViewController: UIViewController {
         else {
             print("The flyout menu feature is DISABLED")
         }
+        
+        flags.setValue(key: "button_color", value: "red")
+        buttonColor = flags.value(for: .buttonColor, ButtonColor.self)
+        print("The button color is: \(buttonColor.rawValue)")
     }
 }
 

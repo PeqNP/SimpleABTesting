@@ -12,13 +12,6 @@
 
 import Foundation
 
-@discardableResult
-private func with<T>(_ item: T, update: (inout T) throws -> Void) rethrows -> T {
-    var this = item
-    try update(&this)
-    return this
-}
-
 protocol FlagSetter {
     func setValue(_ anyValue: Any)
 }
@@ -30,7 +23,7 @@ protocol FlagGetter {
 
 typealias FlagValue = FlagGetter & FlagSetter
 
-struct Flag<T>: FlagValue {
+class Flag<T>: FlagValue {
     typealias FlagMapper = (Any) -> T?
     
     let id: FlagID // The ID of the FlagValue
@@ -48,11 +41,18 @@ struct Flag<T>: FlagValue {
     }
     
     func setValue(_ anyValue: Any) {
+        // Use custom mapper to transform value from `Any` to respective type
         if let mapper = mapper {
-            with(self) { $0.value = mapper(anyValue) }
+            value = mapper(anyValue)
         }
-        else {
-            with(self) { $0.value = anyValue as? T }
+        // The raw value matches the type of the `Flag`
+        else if let castedValue = anyValue as? T {
+            value = castedValue
+        }
+        // The raw value is a string which needs to be converted into the respective `Flag` type
+        // Please refer to `FlagValueMaker` for a list of types that have been extended.
+        else if let Maker = self.default as? FlagValueMaker, let stringValue = anyValue as? String, let castedValue = Maker.make(from: stringValue) as? T {
+            value = castedValue
         }
     }
 }

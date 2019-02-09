@@ -18,6 +18,7 @@
 		07862CE3220E465200C666E7 /* Flag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07862CE2220E465200C666E7 /* Flag.swift */; };
 		07862CE5220E46E300C666E7 /* FlagID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07862CE4220E46E300C666E7 /* FlagID.swift */; };
 		07862CE7220E548000C666E7 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07862CE6220E548000C666E7 /* Environment.swift */; };
+		07862CE9220E5F0D00C666E7 /* FlagValueMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07862CE8220E5F0C00C666E7 /* FlagValueMaker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		07862CE2220E465200C666E7 /* Flag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flag.swift; sourceTree = "<group>"; };
 		07862CE4220E46E300C666E7 /* FlagID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagID.swift; sourceTree = "<group>"; };
 		07862CE6220E548000C666E7 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		07862CE8220E5F0C00C666E7 /* FlagValueMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagValueMaker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 				07862CE2220E465200C666E7 /* Flag.swift */,
 				07862CE4220E46E300C666E7 /* FlagID.swift */,
 				07862CDE220DD82B00C666E7 /* Flags.swift */,
+				07862CE8220E5F0C00C666E7 /* FlagValueMaker.swift */,
 			);
 			path = ABTest;
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07862CE1220E462400C666E7 /* FlagTypes.swift in Sources */,
+				07862CE9220E5F0D00C666E7 /* FlagValueMaker.swift in Sources */,
 				07862CE5220E46E300C666E7 /* FlagID.swift in Sources */,
 				07862CDF220DD82B00C666E7 /* Flags.swift in Sources */,
 				07862CE7220E548000C666E7 /* Environment.swift in Sources */,
