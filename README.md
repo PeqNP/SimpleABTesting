@@ -1,6 +1,6 @@
-# Simple AB Testing
+# A/B and Feature Flags
 
-This project provides a simple interface to get A/B test answers back from a server.
+Easily configure and retrieve A/B and feature flag configuration.
 
 ## Why Does This Exist?
 
@@ -10,7 +10,7 @@ I couldn't find a solution that fit my needs. I needed something that was dead s
 
 I needed a way to continue development on half-baked features while still deploying features or fixes that are complete.
 
-I also needed an easy way to A/B/C test using Swift `enum` types rather than primitive types. The API is also built for the most common uses cases which is to determine if something is either off or on (boolean).
+I also needed an easy way to A/B[/C] test using Swift `enum` types rather than primitive types (`Bool`). While the API supports multi-variant values it is built for the most common use-case which is to determine if something is either off or on (`Bool`).
 
 ## How It Works
 
@@ -42,7 +42,7 @@ The other flag is a feature flag called `FlagID.enableFlyoutMenu`. It is availab
 
 ### Retrieving Flag Values
 
-The most common use case is to determine if a flag is enabled. This can be done by using the `Flags.isEnabled(for:)` API.
+The most common use case is to determine if a flag is enabled. This can be done by calling `Flags.isEnabled(for:)`.
 
 ```swift
 // Get a boolean value (the most common case) for our flag
@@ -50,7 +50,7 @@ print("Is the flyout menu enabled? \(flags.isEnabled(for: .enableFlyoutMenu) ? "
 // prints: `No`, because we are configured for production and this flag isn't available in production
 ```
 
-Next, let's our multi-variant value. Because the server has not yet configured our A/B flag value, it will return the default value.
+Let's get our multi-variant value. Because the server has not yet configured our flag's value, it will return the default value.
 
 ```swift
 // Get the multi-variant button color value
@@ -73,7 +73,7 @@ print("The button color is: \(buttonColor.rawValue)")
 
 # License
 
-This whole project is licensed under MIT.
+MIT. Knock yourself out.
 
 # HEY!
 
