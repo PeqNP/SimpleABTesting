@@ -16,8 +16,8 @@ class ViewController: UIViewController {
         
         // Register the flags
         flags.register(flags: [
-            Flag<ButtonColor>(id: .buttonColor, key: "button_color", default: .default, mapper: ButtonColor.mapper),
-            Flag<Bool>(id: .enableFlyoutMenu, default: false)
+            Flag<ButtonColor>(id: .buttonColor, key: "button_color", default: .default, available: [.all], mapper: ButtonColor.mapper),
+            Flag<Bool>(id: .enableFlyoutMenu, default: false, available: [.all])
         ])
         
         // Get a boolean value (the most common case) for our flag

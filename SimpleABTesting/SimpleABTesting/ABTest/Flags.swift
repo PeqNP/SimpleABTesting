@@ -34,11 +34,15 @@ class Flags {
             fatalError("Flat not found with ID \(flagId). Register flags with `register(flag:)`")
         }
         
-        if let value = flagValue.value {
-            return value
+        guard let value = flagValue.value else {
+            return flagValue.default
         }
         
-        return flagValue.defaultValue(for: environment)
+        guard flagValue.available.contains(environment) || flagValue.available.contains(.all) else {
+            return flagValue.default
+        }
+        
+        return value
     }
     
     /**

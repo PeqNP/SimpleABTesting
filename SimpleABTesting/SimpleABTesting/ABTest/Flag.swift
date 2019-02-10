@@ -23,72 +23,24 @@ protocol FlagGetter {
 
 typealias FlagValue = FlagGetter & FlagSetter
 
-struct DefaultValues<T> {
-    let prod: T
-    let qa: T
-    let dev: T
-    
-    /**
-     Sets all environments to the value of `prod`.
-     */
-    init(prod: T) {
-        self.prod = prod
-        self.qa = prod
-        self.dev = prod
-    }
-    
-    /**
-     Sets `dev` and `qa` to the value of `qa`.
-     */
-    init(prod: T, qa: T) {
-        self.prod = prod
-        self.qa = qa
-        self.dev = qa
-    }
-    
-    /**
-     Sets every environment to a different value.
-     */
-    init(prod: T, qa: T, dev: T) {
-        self.prod = prod
-        self.qa = qa
-        self.dev = dev
-    }
-}
-
 class Flag<T>: FlagValue {
+
     typealias FlagMapper = (Any) -> T?
     
     let id: FlagID // The ID of the FlagValue
     let key: String? // Used to reference a server value for a respective flag
-    let defaults: DefaultValues<T> // The default value of the flag if value is not set
-    var value: T? // Value of flag (usually assigned by server)
-    let mapper: FlagMapper? // Used to transform server value into flag's respective type
+    var value: T? // Value of the flag. Assigned by server or manually for local (feature) flags
+    let `default`: T // The default value of the flag if the `value` is not set
+    let available: [Environment] // The environments the flag is enabled in
     
-    /**
-     Use this initializer to set the default value to the same value across all environments.
-     */
-    init(id: FlagID, key: String? = nil, `default`: T, value: T? = nil, mapper: FlagMapper? = nil) {
+    private let mapper: FlagMapper? // Used to transform server value into flag's respective type
+    
+    init(id: FlagID, key: String? = nil, `default`: T, value: T? = nil, available: [Environment], mapper: FlagMapper? = nil) {
         self.key = key
         self.id = id
         self.value = value
-        self.mapper = mapper
-
-        self.defaults = DefaultValues(
-            prod: `default`,
-            qa: `default`,
-            dev: `default`
-        )
-    }
-    
-    /**
-     Use this initializer when the flag must be different for each environment. This is common with feature flags.
-     */
-    init(id: FlagID, key: String? = nil, defaults: DefaultValues<T>, value: T? = nil, mapper: FlagMapper? = nil) {
-        self.key = key
-        self.id = id
-        self.value = value
-        self.defaults = defaults
+        self.default = `default`
+        self.available = available
         self.mapper = mapper
     }
     
@@ -97,25 +49,14 @@ class Flag<T>: FlagValue {
         if let mapper = mapper {
             value = mapper(anyValue)
         }
-        // The raw value matches the type of the `Flag`
+        // The raw value matches the type of the generic type for this `Flag`
         else if let castedValue = anyValue as? T {
             value = castedValue
         }
         // The raw value is a string which needs to be converted into the respective `Flag` type
         // Please refer to `FlagValueMaker` for a list of types that have been extended.
-        else if let Maker = self.defaults.prod as? FlagValueMaker, let stringValue = anyValue as? String, let castedValue = Maker.make(from: stringValue) as? T {
+        else if let Maker = self.default as? FlagValueMaker, let stringValue = anyValue as? String, let castedValue = Maker.make(from: stringValue) as? T {
             value = castedValue
-        }
-    }
-    
-    func defaultValue(for environment: Environment) -> T {
-        switch environment {
-        case .prod:
-            return defaults.prod
-        case .qa:
-            return defaults.qa
-        case .dev:
-            return defaults.dev
         }
     }
 }
