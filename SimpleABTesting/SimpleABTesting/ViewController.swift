@@ -16,12 +16,17 @@ class ViewController: UIViewController {
         
         // Register the flags
         flags.register(flags: [
-            Flag<ButtonColor>(id: .buttonColor, key: "button_color", default: .default, available: [.all], mapper: ButtonColor.mapper),
-            Flag<Bool>(id: .enableFlyoutMenu, default: false, available: [.all])
+            Flag<ButtonColor>(id: .buttonColor, key: "button_color", default: .default, available: .all, mapper: ButtonColor.mapper),
+            Flag<Bool>(id: .enableFlyoutMenu, default: false, available: [.dev, .qa])
         ])
         
         // Get a boolean value (the most common case) for our flag
         print("Is the flyout menu enabled? \(flags.isEnabled(for: .enableFlyoutMenu) ? "Yes" : "No").")
+        
+        // Even if we set `enableFlyoutMenu` to `true` it will be `false` as we're in the `.prod` environment
+        flags.setValue(for: .enableFlyoutMenu, value: true)
+        print("Is the flyout menu enabled? \(flags.isEnabled(for: .enableFlyoutMenu) ? "Yes" : "No").")
+
         
         // Get a multi-variant value
         var buttonColor = flags.value(for: .buttonColor, ButtonColor.self)

@@ -31,11 +31,11 @@ class Flag<T>: FlagValue {
     let key: String? // Used to reference a server value for a respective flag
     var value: T? // Value of the flag. Assigned by server or manually for local (feature) flags
     let `default`: T // The default value of the flag if the `value` is not set
-    let available: [Environment] // The environments the flag is enabled in
+    let available: Environment // The environments the flag is enabled in
     
     private let mapper: FlagMapper? // Used to transform server value into flag's respective type
     
-    init(id: FlagID, key: String? = nil, `default`: T, value: T? = nil, available: [Environment], mapper: FlagMapper? = nil) {
+    init(id: FlagID, key: String? = nil, `default`: T, value: T? = nil, available: Environment, mapper: FlagMapper? = nil) {
         self.key = key
         self.id = id
         self.value = value

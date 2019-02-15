@@ -10,9 +10,12 @@
 
 import Foundation
 
-enum Environment {
-    case all
-    case dev
-    case qa
-    case prod
+struct Environment: OptionSet {
+    let rawValue: Int
+    
+    static let dev = Environment(rawValue: 1 << 0)
+    static let qa = Environment(rawValue: 1 << 1)
+    static let prod = Environment(rawValue: 1 << 2)
+    
+    static let all: Environment = [.dev, .qa, .prod]
 }

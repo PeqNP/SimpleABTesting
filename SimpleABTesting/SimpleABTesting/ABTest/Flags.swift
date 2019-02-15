@@ -38,7 +38,7 @@ class Flags {
             return flagValue.default
         }
         
-        guard flagValue.available.contains(environment) || flagValue.available.contains(.all) else {
+        guard flagValue.available.contains(environment) else {
             return flagValue.default
         }
         
@@ -98,6 +98,23 @@ class Flags {
     func setValue(key: String, value: Any) {
         guard let flagValue = flagValueType(for: key) else {
             print("WARN: A flag with key \(key) does not exist")
+            return
+        }
+        
+        flagValue.setValue(value)
+    }
+    
+    /**
+     Attempts to set the value of a flag to its respective `FlagValue`.
+     
+     This can be used to set a `FeatureValue.value` when reading from a local store, such as `UserDefaults`.
+     
+     - parameter flagId: The `FlagID` for the `FlagValue`
+     - parameter value: The value to associate to the `FlagValue`
+     */
+    func setValue(for flagId: FlagID, value: Any) {
+        guard let flagValue = flagValueType(for: flagId) else {
+            print("WARN: Flag w/ ID  \(flagId) has not been registered")
             return
         }
         
