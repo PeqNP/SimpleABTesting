@@ -73,8 +73,4 @@ print("The button color is: \(buttonColor.rawValue)")
 
 # License
 
-MIT. Knock yourself out.
-
-# HEY!
-
-Do you like this?! You can easily send me money using this link https://paypal.me/PeqNP. It can be small or large. $3 is a good mount. It will make you feel good about yourself and it will get me halfway to a coffee (LOL). Seriously, please do it. I need it. You need this library. And I fucking deserve it.
+MIT
